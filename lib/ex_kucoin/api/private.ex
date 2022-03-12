@@ -38,13 +38,18 @@ defmodule ExKucoin.Api.Private do
 
   @spec delete(path, config | nil) :: response
   def delete(path, config \\ nil) do
+    delete(path, %{}, config)
+  end
+  
+  def delete(path, params, config \\nil) do 
     config = Config.config_or_env_config(config)
 
     path
     |> url(config)
-    |> HTTPoison.delete(headers("DELETE", path, %{}, config), request_options())
+    |> HTTPoison.delete(headers("DELETE", path, params, config), request_options())
     |> parse_response()
   end
+  
 
   defp headers(method, path, body, config) do
     timestamp = ExKucoin.Auth.timestamp()
