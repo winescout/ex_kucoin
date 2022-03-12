@@ -41,7 +41,7 @@ defmodule ExKucoin.Api.Private do
     delete(path, %{}, config)
   end
   
-  def delete(path, params, config \\nil) do 
+  def delete(path, params, config) do 
     config = Config.config_or_env_config(config)
 
     path
